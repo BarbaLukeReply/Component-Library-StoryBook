@@ -1,5 +1,5 @@
 {
-  "name":"@BarbaLukeReply/storybooktrycomponentlib",
+  "name":"@barbalukereply/storybooktrycomponentlib",
   "version": "1.0.0",
   "description": "A Library of Components created with StoryBook, Vite, React and Tailwind",
   "type": "module",
@@ -10,7 +10,7 @@
     "/dist"
   ],
   "publishConfig": {
-  "registry": "https://npm.pkg.github.com/@BarbaLukeReply"
+  "registry": "https://npm.pkg.github.com/@barbalukereply"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
