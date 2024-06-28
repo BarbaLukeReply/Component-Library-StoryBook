@@ -1,5 +1,5 @@
 {
-  "name": "component-library-storybook",
+  "name": "@BarbaLukeReply/Component-Library-StoryBook",
   "version": "1.0.0",
   "description": "A Library of Components created with StoryBook, Vite, React and Tailwind",
   "type": "module",
@@ -9,6 +9,9 @@
   "files": [
     "/dist"
   ],
+  "publishConfig": {
+  "registry": "https://npm.pkg.github.com/@BarbaLukeReply"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore --fix",
