@@ -1,5 +1,5 @@
 {
-  "name": "@BarbaLukeReply/Component-Library-StoryBook",
+  "name":"storybooktrycomponentlib",
   "version": "1.0.0",
   "description": "A Library of Components created with StoryBook, Vite, React and Tailwind",
   "type": "module",
