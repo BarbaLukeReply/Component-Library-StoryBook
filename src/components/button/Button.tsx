@@ -1,19 +1,20 @@
 import "../../tailwind.css";
+import { Button as ExternalButton } from "react-aria-components";
 
-import React, { MouseEventHandler } from "react";
+import React from "react";
 
 export type ButtonProps = {
   text?: string;
   primary?: boolean;
   disabled?: boolean;
   size?: "small" | "medium" | "large";
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick?: () => void;
 };
 
 const Button: React.FC<ButtonProps> = ({
   size,
   primary,
-  disabled,
+  disabled = false,
   text,
   onClick,
   ...props
@@ -33,15 +34,15 @@ const Button: React.FC<ButtonProps> = ({
     : "cursor-pointer";
 
   return (
-    <button
+    <ExternalButton
       type="button"
-      onClick={onClick}
+      onPress={onClick}
       className={`font-bold border-0 rounded-lg inline-block ${primaryClasses} ${sizeClasses} ${disabledClasses}`}
-      disabled={disabled}
+      isDisabled={disabled}
       {...props}
     >
       {text}
-    </button>
+    </ExternalButton>
   );
 };
 
