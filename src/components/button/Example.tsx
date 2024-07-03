@@ -1,5 +1,6 @@
 import { FC } from "react";
 import Button, { ButtonProps } from "./Button";
+import "../../tailwind.css";
 
 const Example: FC<ButtonProps> = ({
   disabled = false,
@@ -9,14 +10,7 @@ const Example: FC<ButtonProps> = ({
   text = "Button",
 }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100%",
-      }}
-    >
+    <div className="flex justify-center items-center h-full">
       <Button
         size={size}
         text={text}
