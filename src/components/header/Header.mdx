@@ -1,0 +1,41 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as Header from "./Header.stories.tsx";
+
+<Meta of={Header} title="Header" />
+
+# Header
+
+Button component with different props.
+
+#### Example
+
+<Canvas of={Header.Sample} />
+
+## Usage
+
+```ts
+import {Header} from "sld-ui";
+import companyLogo from "path/to/companyLogo";
+import userLogo from "path/to/userLogo";
+
+const Example = () => {
+  return (
+      <Header
+        companyLogo={companyLogo}
+        userLogo={userLogo}
+        companyName={"Nome Azienda"}
+        userName={"Nome Utente"}
+      />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+
+- **companyLogo** - A string representing the path to the company logo image.
+- **userLogo** - A string representing the path to the user logo image.
+- **companyName** - A string representing the name of the company.
+- **userName** - A string representing the name of the user.
