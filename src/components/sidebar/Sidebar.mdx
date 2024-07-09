@@ -1,0 +1,44 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as Sidebar from "./Sidebar.stories.tsx";
+
+<Meta of={Sidebar} title="Sidebar" />
+
+# Sidebar
+
+Sidebar component with different props.
+
+#### Example
+
+<Canvas of={Sidebar.Sample} />
+
+## Usage
+
+```ts
+import {Sidebar} from "sld-ui";
+import {MenuItem} from "sld-ui";
+
+const Example = () => {
+  menuItems = [
+    <MenuItem
+      key="1"
+    />,
+    <MenuItem
+      key="2"
+    />,
+  ];
+  return (
+      <Sidebar
+        menuItems={menuItems}
+      />
+  );
+};
+
+export default Example;
+```
+
+#### Arguments
+
+- **menuItems** - An array of MenuItem components.
+
+```
