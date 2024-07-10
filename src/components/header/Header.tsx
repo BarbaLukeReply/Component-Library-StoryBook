@@ -4,101 +4,72 @@ import {
   Navbar,
   NavbarBrand,
   NavbarContent,
-  NavbarItem,
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
 } from "@nextui-org/react";
 import { Link } from "@nextui-org/react";
-import AccountLogo from "../../assets/account.svg";
-import LogoutLogo from "../../assets/logout.svg";
-import ItalyFlag from "../../assets/italy.svg";
-import CompanyLogo from "../../assets/company-logo.jpg";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from "@nextui-org/react";
+
+export type flagsObject = {
+  language: string;
+  flag: string;
+};
 
 export type HeaderProps = {
   userName?: string;
+  isMobile?: boolean;
+  menuItems: string[];
+  companyLogo: string;
+  logoutLogo: string;
+  flags: flagsObject[];
+  accountLogo: string;
+  language: string;
+  companyName?: string;
+  userCompanyName?: string;
+  clientCode?: string;
 };
 
-const Header: React.FC<HeaderProps> = ({ userName }) => {
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
+const Header: React.FC<HeaderProps> = ({
+  userName,
+  isMobile,
+  menuItems,
+  companyLogo,
+  logoutLogo,
+  flags,
+  accountLogo,
+  language,
+  userCompanyName,
+  companyName,
+  clientCode,
+}) => {
+  const [currentLanguage, setCurrentLanguage] = React.useState(language);
 
-  return (
+  const handleCurrentLanguage = (language: string) => {
+    setCurrentLanguage(language);
+  };
+
+  const MobileMenu = () => (
     <Navbar className="bg-[#f7f7f7]" isBordered>
       <NavbarContent className="sm:hidden" justify="start">
         <NavbarMenuToggle />
       </NavbarContent>
       <NavbarBrand className="grow-[1]">
         <img
-          src={CompanyLogo}
+          src={companyLogo}
           alt="Logo Azienda"
           className="h-6 sm:h-7 md:h-8 mr-2"
         />
         <span className="text-gray-800 text-sm sm:text-base md:text-xl font-bold">
-          Nome Azienda
+          {companyName}
         </span>
       </NavbarBrand>
-      <NavbarContent
-        className="hidden sm:grow-[3] gap-6 shrink xs:hidden"
-        justify="end"
-      >
-        <NavbarItem className="">
-          <span className="text-gray-800 text-sm sm:text-base md:text-xl font-bold">
-            Codice Cliente:&nbsp;
-          </span>
-          <span className="text-gray-800 text-sm sm:text-base md:text-xl">
-            000001
-          </span>
-        </NavbarItem>
-        <NavbarItem className="">
-          <div className="flex items-center">
-            <div className="flex flex-col items-center mr-1">
-              <span className="text-gray-800 text-sm sm:text-base md:text-md">
-                {userName}
-              </span>
-              <span className="text-gray-600 text-sm sm:text-base md:text-sm">
-                Azienda
-              </span>
-            </div>
-            <img
-              src={AccountLogo}
-              alt="Logo Utente"
-              className="h-6 sm:h-7 md:h-8"
-            />
-          </div>
-        </NavbarItem>
-        <NavbarItem className="">
-          <div className="flex items-center">
-            <span className="text-gray-600 text-sm sm:text-base md:text-sm mr-1">
-              Italy
-            </span>
-            <img
-              src={ItalyFlag}
-              alt="Logo Utente"
-              className="h-6 sm:h-7 md:h-8"
-            />
-          </div>
-        </NavbarItem>
-        <NavbarItem className="">
-          <Link href="#">
-            <img
-              src={LogoutLogo}
-              alt="Logo Utente"
-              className="h-6 sm:h-7 md:h-6"
-            />
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
@@ -121,32 +92,115 @@ const Header: React.FC<HeaderProps> = ({ userName }) => {
       </NavbarMenu>
     </Navbar>
   );
-  /*
+
   return (
-    <header className="w-full flex items-center justify-between bg-[#f7f7f7] p-2 sm:p-3 md:p-4">
-      <div className="flex items-center">
-        <img
-          src={companyLogo}
-          alt="Logo Azienda"
-          className="h-6 sm:h-7 md:h-8 mr-2"
-        />
-        <span className="text-gray-800 text-sm sm:text-base md:text-xl font-bold">
-          {companyName}
-        </span>
-      </div>
-      <div className="flex items-center">
-        <img
-          src={userLogo}
-          alt="Logo Utente"
-          className="h-6 sm:h-7 md:h-8 mr-2"
-        />
-        <span className="text-gray-800 text-sm sm:text-base md:text-xl">
-          {userName}
-        </span>
-      </div>
-    </header>
+    <>
+      {isMobile ? (
+        <MobileMenu />
+      ) : (
+        <header className="w-full flex items-center justify-between bg-[#f7f7f7] p-2 sm:p-3 md:p-4">
+          <div className="grow">
+            <div className="flex items-center">
+              <img
+                src={companyLogo}
+                alt="Logo Azienda"
+                className="h-6 sm:h-7 md:h-8 mr-2"
+              />
+              <span className="text-gray-800 text-sm sm:text-base md:text-xl font-bold">
+                {companyName}
+              </span>
+            </div>
+          </div>
+          <div className="grow-[2] flex justify-end items-center gap-8">
+            <div>
+              <span className="text-gray-800 text-sm sm:text-base md:text-xl font-bold">
+                Codice Cliente:&nbsp;
+              </span>
+              <span className="text-gray-800 text-sm sm:text-base md:text-xl">
+                {clientCode}
+              </span>
+            </div>
+            <Dropdown>
+              <DropdownTrigger>
+                <Button variant="bordered">
+                  <div className="flex items-center">
+                    <div className="flex flex-col items-center mr-1">
+                      <span className="text-gray-800 text-sm sm:text-base md:text-md">
+                        {userName}
+                      </span>
+                      <span className="text-gray-600 text-sm sm:text-base md:text-sm">
+                        {userCompanyName}
+                      </span>
+                    </div>
+                    <img
+                      src={accountLogo}
+                      alt="Logo Utente"
+                      className="h-6 sm:h-7 md:h-8"
+                    />
+                  </div>
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Static Actions">
+                <DropdownItem key="new">
+                  Modifica impoastazioni di accesso
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+            <Dropdown>
+              <DropdownTrigger>
+                <Button variant="bordered">
+                  <div className="flex items-center">
+                    <span className="text-gray-600 text-sm sm:text-base md:text-sm mr-1">
+                      {
+                        flags.find((flag) => flag.language === currentLanguage)
+                          ?.language
+                      }
+                    </span>
+                    <img
+                      src={
+                        flags.find((flag) => flag.language === currentLanguage)
+                          ?.flag
+                      }
+                      alt="Bandiera Lingua"
+                      className="h-6 sm:h-7 md:h-8"
+                    />
+                  </div>
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Static Actions">
+                {flags
+                  .filter((flag) => flag.language !== currentLanguage)
+                  .map(({ language, flag }) => (
+                    <DropdownItem
+                      key={language}
+                      onClick={() => handleCurrentLanguage(language)}
+                    >
+                      <div className="flex items-center">
+                        <span className="text-gray-600 text-sm sm:text-base md:text-sm mr-1">
+                          {language}
+                        </span>
+                        <img
+                          src={flag}
+                          alt={`Bandiera ${language}`}
+                          className="h-6 sm:h-7 md:h-8"
+                        />
+                      </div>
+                    </DropdownItem>
+                  ))}
+              </DropdownMenu>
+            </Dropdown>
+            <Link href="#">
+              <img
+                src={logoutLogo}
+                alt="Logo Utente"
+                className="h-6 sm:h-7 md:h-6"
+              />
+            </Link>
+          </div>
+        </header>
+      )}
+    </>
   );
-  */
 };
 
 export default Header;

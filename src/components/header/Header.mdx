@@ -16,14 +16,26 @@ Header component with different props.
 
 ```ts
 import {Header} from "sld-ui";
-import companyLogo from "path/to/companyLogo";
-import userLogo from "path/to/userLogo";
+import CompanyLogo from "../../assets/company-logo.jpg";
+import LogoutLogo from "../../assets/logout.svg";
+import AccountLogo from "../../assets/account.svg";
+import ItalyFlag from "../../assets/italy.svg";
 
 const Example = () => {
   return (
       <Header
-        userName={"Nome Utente"}
-      />
+      userName={"John Doe"}
+      isMobile={false}
+      menuItems={["Home", "About", "Contact"]}
+      companyLogo={"assets/companyLogo.png"}
+      logoutLogo={"assets/logoutLogo.png"}
+      flags={[{ language: "en", flag: "assets/flags/en.png" }, { language: "fr", flag: "assets/flags/fr.png" }]}
+      accountLogo={"assets/accountLogo.png"}
+      language={"en"}
+      userCompanyName={"User Company Name"}
+      companyName={"Company Name"}
+      clientCode={"123456"}
+    />
   );
 };
 
@@ -32,7 +44,14 @@ export default Example;
 
 #### Arguments
 
-- **companyLogo** - A string representing the path to the company logo image.
-- **userLogo** - A string representing the path to the user logo image.
-- **companyName** - A string representing the name of the company.
-- **userName** - A string representing the name of the user.
+- **userName**: User name to be displayed in the header.
+- **isMobile**: Boolean value to check if the device is mobile or not.
+- **menuItems**: Array of menu items to be displayed in the header.
+- **companyLogo**: Company logo to be displayed in the header.
+- **logoutLogo**: Logout logo to be displayed in the header.
+- **flags**: Array of flags to be displayed in the header.
+- **accountLogo**: Account logo to be displayed in the header.
+- **language**: Language to be displayed in the header.
+- **userCompanyName**: User company name to be displayed in the header.
+- **companyName**: Company name to be displayed in the header.
+- **clientCode**: Client code to be displayed in the header.
