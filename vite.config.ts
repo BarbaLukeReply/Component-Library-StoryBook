@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, UserConfig } from "vite";
 import dts from "vite-plugin-dts";
 import { peerDependencies } from "./package.json";
 import tailwindcss from "tailwindcss";
@@ -23,4 +23,4 @@ export default defineConfig({
     },
   },
   plugins: [dts()], // Uses the 'vite-plugin-dts' plugin for generating TypeScript declaration files (d.ts).
-});
+} as UserConfig);

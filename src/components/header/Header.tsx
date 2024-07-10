@@ -23,17 +23,17 @@ export type flagsObject = {
 };
 
 export type HeaderProps = {
-  userName?: string;
-  isMobile?: boolean;
+  userName: string;
+  isMobile: boolean;
   menuItems: string[];
   companyLogo: string;
   logoutLogo: string;
   flags: flagsObject[];
   accountLogo: string;
   language: string;
-  companyName?: string;
-  userCompanyName?: string;
-  clientCode?: string;
+  companyName: string;
+  userCompanyName: string;
+  clientCode: string;
 };
 
 const Header: React.FC<HeaderProps> = ({
@@ -141,21 +141,25 @@ const Header: React.FC<HeaderProps> = ({
                 </Button>
               </DropdownTrigger>
               <DropdownMenu aria-label="Static Actions">
-                <DropdownItem key="new">
-                  Modifica impoastazioni di accesso
-                </DropdownItem>
+                <DropdownItem
+                  key="new"
+                  title={"Modifica impoastazioni di accesso"}
+                />
               </DropdownMenu>
             </Dropdown>
             <Dropdown>
               <DropdownTrigger>
-                <Button variant="bordered">
-                  <div className="flex items-center">
+                <Button
+                  variant="bordered"
+                  startContent={
                     <span className="text-gray-600 text-sm sm:text-base md:text-sm mr-1">
                       {
-                        flags.find((flag) => flag.language === currentLanguage)
+                        flags?.find((flag) => flag.language === currentLanguage)
                           ?.language
                       }
                     </span>
+                  }
+                  endContent={
                     <img
                       src={
                         flags.find((flag) => flag.language === currentLanguage)
@@ -164,28 +168,25 @@ const Header: React.FC<HeaderProps> = ({
                       alt="Bandiera Lingua"
                       className="h-6 sm:h-7 md:h-8"
                     />
-                  </div>
-                </Button>
+                  }
+                />
               </DropdownTrigger>
               <DropdownMenu aria-label="Static Actions">
                 {flags
-                  .filter((flag) => flag.language !== currentLanguage)
-                  .map(({ language, flag }) => (
+                  ?.filter((flag) => flag.language !== currentLanguage)
+                  ?.map(({ language, flag }) => (
                     <DropdownItem
                       key={language}
                       onClick={() => handleCurrentLanguage(language)}
-                    >
-                      <div className="flex items-center">
-                        <span className="text-gray-600 text-sm sm:text-base md:text-sm mr-1">
-                          {language}
-                        </span>
+                      endContent={
                         <img
                           src={flag}
                           alt={`Bandiera ${language}`}
                           className="h-6 sm:h-7 md:h-8"
                         />
-                      </div>
-                    </DropdownItem>
+                      }
+                      startContent={<h1 className="text-xl">{language}</h1>}
+                    />
                   ))}
               </DropdownMenu>
             </Dropdown>
