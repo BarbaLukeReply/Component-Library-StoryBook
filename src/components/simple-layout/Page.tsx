@@ -1,6 +1,7 @@
+import Header from "../header/Header";
+import Sidebar from "../sidebar/Sidebar";
+import { HeaderProps } from "../header/Header";
 import { FC, useEffect, useState } from "react";
-import Header, { HeaderProps } from "./Header";
-import "../../tailwind.css";
 import CompanyLogo from "../../assets/company-logo.jpg";
 import LogoutLogo from "../../assets/logout.svg";
 import AccountLogo from "../../assets/account.svg";
@@ -14,7 +15,7 @@ import UkranianFlag from "../../assets/flags/ukraine.svg";
 import PolandFlag from "../../assets/flags/poland.svg";
 import PortugaiseFlag from "../../assets/flags/portugal.svg";
 
-const Example: FC<HeaderProps> = ({
+const HeaderPage: FC<HeaderProps> = ({
   userName = "John Doe",
   isMobile = false,
   menuItems = [
@@ -224,20 +225,30 @@ const Example: FC<HeaderProps> = ({
   }, []);
 
   return (
-    <Header
-      userName={userName}
-      isMobile={isMobileCalculated || isMobile}
-      menuItems={menuItems}
-      companyLogo={companyLogo}
-      logoutLogo={logoutLogo}
-      flags={flags}
-      accountLogo={accountLogo}
-      language={language}
-      userCompanyName={userCompanyName}
-      companyName={companyName}
-      clientCode={clientCode}
-    />
+    <div className="flex flex-col h-screen w-screen bg-[#f7fae7]">
+      <div className="flex">
+        <Header
+          userName={userName}
+          isMobile={isMobileCalculated || isMobile}
+          menuItems={menuItems}
+          companyLogo={companyLogo}
+          logoutLogo={logoutLogo}
+          flags={flags}
+          accountLogo={accountLogo}
+          language={language}
+          userCompanyName={userCompanyName}
+          companyName={companyName}
+          clientCode={clientCode}
+        />
+      </div>
+      <div className="flex flex-grow">
+        <div className="hidden md:flex">
+          <Sidebar menuItems={menuItems} />
+        </div>
+        <div className="flex-grow p-4 h-full"></div>
+      </div>
+      <div className="flex">sono il footer</div>
+    </div>
   );
 };
-
-export default Example;
+export default HeaderPage;

@@ -10,20 +10,151 @@ export default meta;
 type Story = StoryObj<typeof Example>;
 
 const menuItems = [
-  <h2
-    key="1"
-    className="block py-2.5 px-4 rounded-lg transition duration-200 hover:bg-gray-400 text-gray-800 font-semibold shadow-md"
-  >
-    Page 1
-  </h2>,
-  <h2
-    key="2"
-    className="block py-2.5 px-4 rounded-lg transition duration-200 hover:bg-gray-400 text-gray-800 font-semibold shadow-md mt-4"
-  >
-    Page 2
-  </h2>,
+  {
+    name: "Pagina Iniziale",
+    link: "/home",
+    active: true,
+    accordion: false,
+    subMenuItems: [],
+  },
+  {
+    name: "Notifiche",
+    link: "/notifications",
+    active: false,
+    accordion: false,
+    subMenuItems: [],
+  },
+  {
+    name: "Anagrafica",
+    link: "",
+    active: false,
+    accordion: true,
+    subMenuItems: [
+      {
+        name: "Informazioni Generali",
+        link: "/general-information",
+        active: false,
+        accordion: false,
+        subMenuItems: [],
+      },
+      {
+        name: "Contatti",
+        link: "/contacts",
+        active: false,
+        accordion: false,
+        subMenuItems: [],
+      },
+      {
+        name: "Utente Master/altri utenti",
+        link: "/users",
+        active: false,
+        accordion: false,
+        subMenuItems: [],
+      },
+    ],
+  },
+  {
+    name: "Amministrazione",
+    link: "",
+    active: false,
+    accordion: true,
+    subMenuItems: [
+      {
+        name: "Documenti Fiscali",
+        link: "/fee-documents",
+        active: false,
+        accordion: false,
+        subMenuItems: [],
+      },
+      {
+        name: "Documenti",
+        link: "/documents",
+        active: false,
+        accordion: false,
+        subMenuItems: [],
+      },
+      {
+        name: "Documenti Personali",
+        link: "/personal-documents",
+        active: false,
+        accordion: false,
+        subMenuItems: [],
+      },
+    ],
+  },
+  {
+    name: "Veicoli",
+    link: "",
+    active: false,
+    accordion: true,
+    subMenuItems: [
+      {
+        name: "Anagrafica Veicoli",
+        link: "/vehicles",
+        active: false,
+        accordion: false,
+        subMenuItems: [],
+      },
+      {
+        name: "Parco Mezzi",
+        link: "/fleet",
+        active: false,
+        accordion: false,
+        subMenuItems: [],
+      },
+    ],
+  },
+  {
+    name: "Servizi",
+    link: "",
+    active: false,
+    accordion: true,
+    subMenuItems: [
+      {
+        name: "Offerta Servizi",
+        link: "/services",
+        active: false,
+        accordion: false,
+        subMenuItems: [],
+      },
+      {
+        name: "Attivazione Servizi",
+        link: "/services-activation",
+        active: false,
+        accordion: false,
+        subMenuItems: [],
+      },
+      {
+        name: "Servizi al veicolo",
+        link: "/vehicle-services",
+        active: false,
+        accordion: false,
+        subMenuItems: [],
+      },
+      {
+        name: "Supporto dispositivi",
+        link: "/device-support",
+        active: false,
+        accordion: false,
+        subMenuItems: [],
+      },
+      {
+        name: "Assicurazioni",
+        link: "/insurances",
+        active: false,
+        accordion: false,
+        subMenuItems: [],
+      },
+    ],
+  },
+  {
+    name: "FAQ",
+    link: "/faq",
+    active: false,
+    accordion: false,
+    subMenuItems: [],
+  },
 ];
-
 
 export const Sample: Story = {
   args: {

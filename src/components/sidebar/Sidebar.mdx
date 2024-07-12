@@ -16,17 +16,53 @@ Sidebar component with different props.
 
 ```ts
 import {Sidebar} from "sld-ui";
-import {MenuItem} from "sld-ui";
 
 const Example = () => {
-  menuItems = [
-    <MenuItem
-      key="1"
-    />,
-    <MenuItem
-      key="2"
-    />,
-  ];
+  const menuItems = [
+  {
+    name: "Pagina Iniziale",
+    link: "/home",
+    active: true,
+    accordion: false,
+    subMenuItems: [],
+  },
+  {
+    name: "Anagrafica",
+    link: "",
+    active: false,
+    accordion: true,
+    subMenuItems: [
+      {
+        name: "Informazioni Generali",
+        link: "/general-information",
+        active: false,
+        accordion: false,
+        subMenuItems: [],
+      },
+      {
+        name: "Contatti",
+        link: "/contacts",
+        active: false,
+        accordion: false,
+        subMenuItems: [],
+      },
+      {
+        name: "Utente Master/altri utenti",
+        link: "/users",
+        active: false,
+        accordion: false,
+        subMenuItems: [],
+      },
+    ],
+  },
+  {
+    name: "FAQ",
+    link: "/faq",
+    active: false,
+    accordion: false,
+    subMenuItems: [],
+  },
+];
   return (
       <Sidebar
         menuItems={menuItems}
@@ -39,6 +75,6 @@ export default Example;
 
 #### Arguments
 
-- **menuItems** - An array of MenuItem components.
+- **menuItems** - An array of objects.
 
 ```

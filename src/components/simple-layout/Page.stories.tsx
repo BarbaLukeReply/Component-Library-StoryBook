@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Header from "./Header";
+import HeaderPage from "./Page";
 import CompanyLogo from "../../assets/company-logo.jpg";
 import LogoutLogo from "../../assets/logout.svg";
 import AccountLogo from "../../assets/account.svg";
@@ -13,14 +13,15 @@ import UkranianFlag from "../../assets/flags/ukraine.svg";
 import PolandFlag from "../../assets/flags/poland.svg";
 import PortugaiseFlag from "../../assets/flags/portugal.svg";
 
-const meta: Meta<typeof Header> = {
-  component: Header,
+const meta: Meta<typeof HeaderPage> = {
+  title: "Pages/HeaderPage",
+  component: HeaderPage,
 };
 
 export default meta;
-type Story = StoryObj<typeof Header>;
+type Story = StoryObj<typeof HeaderPage>;
 
-export const Sample: Story = {
+export const Simple: Story = {
   args: {
     userName: "John Doe",
     isMobile: false,

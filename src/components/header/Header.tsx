@@ -7,14 +7,14 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
-} from "@nextui-org/react";
-import { Link } from "@nextui-org/react";
-import {
+  Accordion,
+  AccordionItem,
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
   Button,
+  User,
 } from "@nextui-org/react";
 
 export type flagsObject = {
@@ -22,10 +22,18 @@ export type flagsObject = {
   flag: string;
 };
 
+export type MenuItem = {
+  name: string;
+  link: string;
+  active: boolean;
+  accordion: boolean;
+  subMenuItems: MenuItem[];
+};
+
 export type HeaderProps = {
   userName: string;
   isMobile: boolean;
-  menuItems: string[];
+  menuItems: MenuItem[];
   companyLogo: string;
   logoutLogo: string;
   flags: flagsObject[];
@@ -56,7 +64,7 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   const MobileMenu = () => (
-    <Navbar className="bg-[#f7f7f7]" isBordered>
+    <Navbar className="bg-[#ffffff]" isBordered>
       <NavbarContent className="sm:hidden" justify="start">
         <NavbarMenuToggle />
       </NavbarContent>
@@ -71,24 +79,61 @@ const Header: React.FC<HeaderProps> = ({
         </span>
       </NavbarBrand>
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              className="w-full"
-              color={
-                index === 2
-                  ? "warning"
-                  : index === menuItems.length - 1
-                    ? "danger"
-                    : "foreground"
-              }
-              href="#"
-              size="lg"
-            >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
+        {menuItems?.map((item, index) => {
+          return (
+            <NavbarMenuItem key={`${item}-${index}`}>
+              <Accordion
+                selectionMode={"single"}
+                isCompact={true}
+                showDivider={false}
+              >
+                {item.accordion ? (
+                  <AccordionItem
+                    key={index}
+                    aria-label={item.name}
+                    title={item.name}
+                    classNames={{
+                      content: "pl-2",
+                    }}
+                  >
+                    {item.subMenuItems.map((subItem, subIndex) => {
+                      return (
+                        <Accordion
+                          selectionMode={"single"}
+                          isCompact={true}
+                          showDivider={false}
+                          key={subIndex}
+                        >
+                          <AccordionItem
+                            key={subIndex}
+                            aria-label={subItem.name}
+                            title={subItem.name}
+                            hideIndicator={true}
+                            disableAnimation={true}
+                            classNames={{
+                              content: "p-0 h-0",
+                            }}
+                          />
+                        </Accordion>
+                      );
+                    })}
+                  </AccordionItem>
+                ) : (
+                  <AccordionItem
+                    key={index}
+                    aria-label={item.name}
+                    title={item.name}
+                    hideIndicator={true}
+                    disableAnimation={true}
+                    classNames={{
+                      content: "p-0 h-0",
+                    }}
+                  />
+                )}
+              </Accordion>
+            </NavbarMenuItem>
+          );
+        })}
       </NavbarMenu>
     </Navbar>
   );
@@ -98,7 +143,7 @@ const Header: React.FC<HeaderProps> = ({
       {isMobile ? (
         <MobileMenu />
       ) : (
-        <header className="w-full flex items-center justify-between bg-[#f7f7f7] p-2 sm:p-3 md:p-4">
+        <header className="w-full flex items-center justify-between bg-[#ffffff] p-2 sm:p-3 md:p-4">
           <div className="grow">
             <div className="flex items-center">
               <img
@@ -113,7 +158,7 @@ const Header: React.FC<HeaderProps> = ({
           </div>
           <div className="grow-[2] flex justify-end items-center gap-8">
             <div>
-              <span className="text-gray-800 text-sm sm:text-base md:text-xl font-bold">
+              <span className="text-gray-800 text-sm sm:text-base md:text-base font-bold">
                 Codice Cliente:&nbsp;
               </span>
               <span className="text-gray-800 text-sm sm:text-base md:text-xl">
@@ -122,22 +167,14 @@ const Header: React.FC<HeaderProps> = ({
             </div>
             <Dropdown>
               <DropdownTrigger>
-                <Button variant="bordered">
-                  <div className="flex items-center">
-                    <div className="flex flex-col items-center mr-1">
-                      <span className="text-gray-800 text-sm sm:text-base md:text-md">
-                        {userName}
-                      </span>
-                      <span className="text-gray-600 text-sm sm:text-base md:text-sm">
-                        {userCompanyName}
-                      </span>
-                    </div>
-                    <img
-                      src={accountLogo}
-                      alt="Logo Utente"
-                      className="h-6 sm:h-7 md:h-8"
-                    />
-                  </div>
+                <Button color="primary" variant="light" className="p-4">
+                  <User
+                    name={userName}
+                    description={userCompanyName}
+                    avatarProps={{
+                      src: accountLogo,
+                    }}
+                  />
                 </Button>
               </DropdownTrigger>
               <DropdownMenu aria-label="Static Actions">
@@ -150,7 +187,8 @@ const Header: React.FC<HeaderProps> = ({
             <Dropdown>
               <DropdownTrigger>
                 <Button
-                  variant="bordered"
+                  color="primary"
+                  variant="light"
                   startContent={
                     <span className="text-gray-600 text-sm sm:text-base md:text-sm mr-1">
                       {
@@ -190,13 +228,13 @@ const Header: React.FC<HeaderProps> = ({
                   ))}
               </DropdownMenu>
             </Dropdown>
-            <Link href="#">
+            <Button color="primary" variant="light">
               <img
                 src={logoutLogo}
                 alt="Logo Utente"
                 className="h-6 sm:h-7 md:h-6"
               />
-            </Link>
+            </Button>
           </div>
         </header>
       )}

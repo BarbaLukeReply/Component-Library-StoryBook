@@ -1,6 +1,6 @@
 {
   "name": "@barbalukereply/storybooktrycomponentlib",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A Library of Components created with StoryBook, Vite, React and Tailwind",
   "type": "module",
   "main": "dist/index.cjs.js",
